@@ -5,7 +5,7 @@ pipeline {
         stage('Docker Image build') 
         { 
             steps {
-              bat 'docker build -t ayushishu/django-poll-app:latest .'
+              bat 'docker build -t manokac55/django-poll-app:latest .'
             }
 
         }
