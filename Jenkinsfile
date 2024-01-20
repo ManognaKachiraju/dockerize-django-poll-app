@@ -22,7 +22,7 @@ pipeline {
         stage("Running docker image")
         {
             steps{
-                bat 'docker run  ayushishu/django-poll-app:latest -p 8000:8000'
+                bat 'docker run -p 8000:8000 ayushishu/django-poll-app:latest '
             }
 
         }
