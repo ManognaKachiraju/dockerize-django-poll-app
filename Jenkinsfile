@@ -12,7 +12,7 @@ pipeline {
         stage("Uploading to DockerHub") 
         {
             steps {
-                bat 'docker push ayushishu/django-poll-app:latest '
+                bat 'docker push manokac55/django-poll-app:latest '
                 
 
             }
@@ -22,7 +22,7 @@ pipeline {
         stage("Running docker image")
         {
             steps{
-                bat 'docker run -d -p 8000:8000 --name Manogna ayushishu/django-poll-app:latest '
+                bat 'docker run -d -p 8000:8000 --name Manogna manokac55/django-poll-app:latest '
             }
 
         }
