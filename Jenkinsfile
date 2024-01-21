@@ -26,6 +26,21 @@ pipeline {
             }
 
         }
+
+        stage("Plan Terraform")
+        {
+            steps{
+                bat 'terraform plan'
+            }
+
+        }
+
+        stage("Apply terraform")
+        {
+            steps{
+                bat 'terraform apply'
+            }
+        }
     }
 
 }
