@@ -26,6 +26,13 @@ pipeline {
             }
 
         }
+        
+        stage("Terraform init")
+        {
+            steps{
+                bat 'cd k8s && terraform init'
+            }
+        }
 
         stage("Plan Terraform")
         {
