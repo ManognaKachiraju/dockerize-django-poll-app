@@ -37,7 +37,7 @@ pipeline {
         stage("Plan Terraform")
         {
             steps{
-                bat 'cd k8s && terraform plan'
+                bat 'cd k8s && terraform plan '
             }
 
         }
@@ -45,7 +45,7 @@ pipeline {
         stage("Apply terraform")
         {
             steps{
-                bat 'cd k8s && terraform apply'
+                bat 'cd k8s && terraform apply -auto-approve '
                
             }
         }
