@@ -30,8 +30,7 @@ pipeline {
         stage("Plan Terraform")
         {
             steps{
-                bat 'cd k8s'
-                bat 'terraform plan'
+                bat 'cd k8s && terraform plan'
             }
 
         }
