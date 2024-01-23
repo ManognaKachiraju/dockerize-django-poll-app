@@ -30,6 +30,11 @@ pipeline {
         stage("Terraform init")
         {
             steps{
+
+                timeout(time: 15, unit: "MINUTES") {
+	                    input message: 'Do you want to create the AKS cluster?', ok: 'Yes'
+	                }
+
                 bat 'cd tf-aks && terraform init'
             }
         }
@@ -56,7 +61,7 @@ pipeline {
                 timeout(time: 15, unit: "MINUTES") {
 	                    input message: 'Do you want to approve the deployment?', ok: 'Yes'
 	                }
-                    
+
                 bat 'az aks  get-credentials --resource-group django-app  --name poll-app-aks1 --overwrite-existing'
                 bat 'kubectl apply -f deployment.yaml'
             }
