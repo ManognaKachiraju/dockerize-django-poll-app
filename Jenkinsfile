@@ -53,6 +53,10 @@ pipeline {
         stage("Deployment")
         {
             steps{
+                timeout(time: 15, unit: "MINUTES") {
+	                    input message: 'Do you want to approve the deployment?', ok: 'Yes'
+	                }
+                    
                 bat 'az aks  get-credentials --resource-group django-app  --name poll-app-aks1 --overwrite-existing'
                 bat 'kubectl apply -f deployment.yaml'
             }
