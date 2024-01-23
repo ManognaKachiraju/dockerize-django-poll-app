@@ -65,6 +65,16 @@ pipeline {
                 bat 'kubectl apply -f deployment.yaml'
             }
         }
+          stage("Terraform Destroy")
+        {
+            steps{
+                timeout(time: 0, unit: "MINUTES") {
+	                    input message: 'Do you want to destroy the deployment?', ok: 'Yes,I want to!'
+	                }
+
+                bat 'cd tf-aks && terraform destroy -auto-approve'
+            }
+        }
 
     }
 
