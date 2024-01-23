@@ -63,7 +63,10 @@ pipeline {
 
                 bat 'az aks  get-credentials --resource-group django-app  --name poll-app-aks1 --overwrite-existing'
                 bat 'kubectl apply -f deployment.yaml'
-                bat 'kubectl get services'
+                
+                timeout(time: 1, unit: "MINUTES") {
+	                    bat 'kubectl get services'
+	                }
             }
         }
           stage("Terraform Destroy")
