@@ -31,10 +31,6 @@ pipeline {
         {
             steps{
 
-                timeout(time: 15, unit: "MINUTES") {
-	                    input message: 'Do you want to create the AKS cluster?', ok: 'Yes'
-	                }
-
                 bat 'cd tf-aks && terraform init'
             }
         }
@@ -50,6 +46,9 @@ pipeline {
         stage("Apply terraform")
         {
             steps{
+                    timeout(time: 15, unit: "MINUTES") {
+	                    input message: 'Do you want to create the AKS cluster?', ok: 'Yes'
+	                }
                 bat 'cd tf-aks && terraform apply -auto-approve '
                
             }
