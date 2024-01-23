@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Poll-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: Poll-app
+  template:
+    metadata:
+      labels:
+        app: Poll-app
+    spec:
+      containers:
+      - name: Poll-app
+        image: manokac55/django-poll-app:latest
+
+        ports:
+        - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+   name: django-poll-app
+spec:
+   ports:
+   - port: 3000
+     targetport: 8000
+   selector:
+    app: Poll-app
+    type: Loadbalancer
+

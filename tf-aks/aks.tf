@@ -1,10 +1,10 @@
 resource "azurerm_resource_group" "example" {
-  name     = "mano"
+  name     = "django-app"
   location = "West Europe"
 }
 
 resource "azurerm_kubernetes_cluster" "example" {
-  name                = "example-aks1"
+  name                = "poll-app-aks1"
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
   dns_prefix          = "exampleaks1"

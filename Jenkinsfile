@@ -30,14 +30,14 @@ pipeline {
         stage("Terraform init")
         {
             steps{
-                bat 'cd k8s && terraform init'
+                bat 'cd tf-aks && terraform init'
             }
         }
 
         stage("Plan Terraform")
         {
             steps{
-                bat 'cd k8s && terraform plan '
+                bat 'cd tf-aks && terraform plan '
             }
 
         }
@@ -45,10 +45,19 @@ pipeline {
         stage("Apply terraform")
         {
             steps{
-                bat 'cd k8s && terraform apply -auto-approve '
+                bat 'cd tf-aks && terraform apply -auto-approve '
                
             }
         }
+
+        stage("Deployment")
+        {
+            steps{
+                bat 'az aks  get-credentials --resource-group django-app  --name poll-app-aks1 --overwrite-existing'
+                bat 'kubectl apply -f deployment.yaml'
+            }
+        }
+
     }
 
 }
