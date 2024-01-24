@@ -7,7 +7,7 @@ resource "azurerm_resource_group" "example" {
 resource "azurerm_kubernetes_cluster" "example" {
   name                = "poll-app-aks1"
   location            = "West Europe"
-  resource_group_name = dfghjhj
+  resource_group_name = "dfghjhj"
   dns_prefix          = "exampleaks1"
 
   default_node_pool {
