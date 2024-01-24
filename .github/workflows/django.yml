@@ -42,3 +42,7 @@ jobs:
       run: cd tf-aks && terraform plan
     - name: Terraform apply
       run: cd tf-aks && terraform apply -auto-approve
+      
+    - name: Setup kubectl
+      id: install-kubectl
+      uses: azure/setup-kubectl@v3  
