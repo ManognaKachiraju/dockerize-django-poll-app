@@ -36,4 +36,8 @@ jobs:
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: terraform init      
+      run: terraform init  
+    - name: Terraform plan
+      run: terraform plan
+    - name: Terraform apply
+      run: terraform apply -auto-approve
