@@ -1,38 +1,30 @@
-name: Django CI
+# File: .github/workflows/workflow.yml
 
-on:
-  push:
-    branches: [ "main" ]
-permissions:
-      id-token: write
-      contents: read
+on: [push]
+
+name: Run Azure Login With a Service Principal Secret
 
 jobs:
-  build:
 
+  build-and-deploy:
     runs-on: ubuntu-latest
-    
     steps:
     
-    - uses: actions/checkout@v3
-    - name: docker build
-      run: docker build -t ${{vars.DOCKER_USERNAME}}/django-poll-app .
-    - name: Docker Login
-      uses: docker/login-action@v3.0.0
+    - uses: azure/login@v1
       with:
-          username: ${{vars.DOCKER_USERNAME}}
-          Password: ${{secrets.DOCKER_TOKEN}}
-    - name: Running docker image
-      run: docker push ${{vars.DOCKER_USERNAME}}/django-poll-app
-    - name: Azure login
-      uses: azure/login@v1
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        enable-AzPSSession: true
+    
+    - name: Azure CLI script
+      uses: azure/CLI@v1
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-    - name: demo
-      run: az account show
-  
-            
-          
-     
+        azcliversion: latest
+        inlineScript: |
+          az account show
+
+    - name: Azure PowerShell script
+      uses: azure/powershell@v1
+      with:
+        azPSVersion: "latest"
+        inlineScript: |
+          Get-AzWebApp
