@@ -46,3 +46,7 @@ jobs:
     - name: Setup kubectl
       id: install-kubectl
       uses: azure/setup-kubectl@v3  
+    - name: kubectl deploys 
+      run: kubectl apply -f ./deployment.yaml
+      
+ 
