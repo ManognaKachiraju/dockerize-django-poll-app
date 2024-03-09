@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: poll-app
-        image: manokac55/django-poll-app:latest
+        image: manokac55/django-poll-app:1.2
         ports:
         - containerPort: 8000
 ---
